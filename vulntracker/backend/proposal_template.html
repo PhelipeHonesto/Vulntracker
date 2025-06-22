@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Security Proposal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #EDEDED;
+            background-color: #091c35;
+            margin: 0;
+            padding: 40px;
+        }
+        .container {
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            padding: 40px;
+            box-shadow: 0 0 25px rgba(0, 255, 157, 0.1);
+        }
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00FF9D;
+            margin: 0 0 20px 0;
+            letter-spacing: 1px;
+        }
+        h1 { font-size: 32px; }
+        h2 { font-size: 24px; margin-top: 40px; border-bottom: 2px solid rgba(0, 255, 157, 0.3); padding-bottom: 10px; }
+        hr {
+            border: none;
+            height: 1px;
+            background-color: rgba(0, 255, 157, 0.2);
+            margin: 30px 0;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header-logo {
+            font-size: 40px;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .summary-item {
+            background-color: rgba(10, 75, 182, 0.2);
+            padding: 15px;
+            border-left: 4px solid #F15A29;
+        }
+        .summary-item strong {
+            display: block;
+            color: #F15A29;
+            margin-bottom: 5px;
+        }
+        .risk-level-critical { color: #ff4d4d; }
+        .risk-level-high { color: #F15A29; }
+        .risk-level-medium { color: #ffcc00; }
+        .risk-level-low { color: #00FF9D; }
+        .investment-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .investment-table th, .investment-table td {
+            padding: 12px;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            text-align: left;
+        }
+        .investment-table th {
+            background-color: rgba(0, 255, 157, 0.1);
+            color: #00FF9D;
+        }
+        .price {
+            font-weight: 700;
+            color: #00FF9D;
+        }
+        .notes {
+            margin-top: 20px;
+            font-style: italic;
+            color: #b0b0b0;
+        }
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+        }
+        .footer-quote {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 18px;
+            color: #00FF9D;
+            margin-bottom: 10px;
+        }
+        .footer-brand {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #b0b0b0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-logo">VULNTRACKER</div>
+            <h1>Security Risk Detected on {{ vuln.site }}</h1>
+        </div>
+        
+        <h2>Summary</h2>
+        <p>During an open-surface scan, we identified a vulnerability on your site that may expose data, allow malicious access, or impact customer trust.</p>
+        <div class="summary-grid">
+            <div class="summary-item">
+                <strong>Vulnerability:</strong> {{ vuln.title }}
+            </div>
+            <div class="summary-item">
+                <strong>Risk Level:</strong> 
+                <span class="risk-level-{{ vuln.risk | lower }}">{{ vuln.risk | upper }}</span>
+            </div>
+        </div>
+        <strong>Potential Impact:</strong> {{ vuln.description }}
+
+        <hr>
+
+        <h2>Recommended Fix</h2>
+        <p>We can implement a direct and efficient fix that will:</p>
+        <ul>
+            <li>Patch the exposed entry point</li>
+            <li>Add server-side input validation</li>
+            <li>Configure proper security headers</li>
+            <li>Ensure long-term protection</li>
+        </ul>
+        <strong>Detailed Recommendation:</strong> {{ vuln.recommendation }}
+
+        <hr>
+
+        <h2>Fix Investment</h2>
+        <table class="investment-table">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Patch & Test Vulnerability</td>
+                    <td class="price">${{ "%.2f"|format(vuln.price) }} USD</td>
+                </tr>
+                <tr>
+                    <td>Optional: Security Hardening Package</td>
+                    <td class="price">$49.00 USD</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="notes">
+            <p>✅ 72h turnaround</p>
+            <p>💬 Available for questions anytime</p>
+            <p>🔐 We operate with full transparency and ethical security practices</p>
+        </div>
+
+        <hr>
+        
+        <h2>Let's Secure Your Site</h2>
+        <p>We believe every business — big or small — deserves safe systems and digital peace of mind. To move forward, simply reply to this message or contact us directly at:</p>
+        <p>
+            📧 your-email@domain.com<br>
+            🌐 your-portfolio-link.com
+        </p>
+        
+        <div class="footer">
+            <p><strong>Built with clarity. Offered with honesty.</strong></p>
+            <p><em>This system is a ritual of protection.</em></p>
+            <p class="footer-quote">“Security is clarity. Action is care.”</p>
+            <p class="footer-brand">Orange Sunshine Aviation ☀️ | Ethical Offensive Security Unit</p>
+        </div>
+    </div>
+</body>
+</html> 
