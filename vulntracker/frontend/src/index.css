@@ -8,7 +8,7 @@
   font-weight: 400;
   color-scheme: dark;
   color: #EDEDED;
-  background-color: #0B0B0B;
+  background-color: #0A0A0A;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -21,16 +21,85 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0B0B0B 0%, #1A1A1A 100%);
+  background: #0A0A0A;
+  overflow-x: hidden;
 }
 
 #root {
   width: 100%;
   margin: 0 auto;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
-/* Shamanic green accent elements */
+/* Psychedelic Background Grid */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 255, 157, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 157, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: grid-float 20s linear infinite;
+  z-index: -2;
+}
+
+/* Flowing Grid Animation */
+@keyframes grid-float {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+/* Particle Effects */
+.particle {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  background: #00FF9D;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  animation: particle-float 20s linear infinite;
+}
+
+.particle:nth-child(odd) {
+  background: #F15A29;
+  animation-duration: 25s;
+}
+
+.particle:nth-child(3n) {
+  background: #FF6B9D;
+  animation-duration: 30s;
+}
+
+/* Glassmorphic Effects */
+.glass {
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 255, 157, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 255, 157, 0.2);
+}
+
+.glass-green {
+  background: rgba(0, 255, 157, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 255, 157, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 255, 157, 0.2);
+}
+
+.glass-orange {
+  background: rgba(241, 90, 41, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(241, 90, 41, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(241, 90, 41, 0.2);
+}
+
+/* Shamanic Glow Effects */
 .glow-green {
   box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
 }
@@ -39,59 +108,137 @@ body {
   box-shadow: 0 0 30px rgba(0, 255, 157, 0.5);
 }
 
-/* OSA branding */
+.glow-dual {
+  box-shadow: 
+    0 0 20px rgba(0, 255, 157, 0.5),
+    0 0 40px rgba(241, 90, 41, 0.3);
+}
+
+.glow-triple {
+  box-shadow: 
+    0 0 20px rgba(0, 255, 157, 0.5),
+    0 0 40px rgba(241, 90, 41, 0.3),
+    0 0 60px rgba(255, 107, 157, 0.2);
+}
+
+/* Text Effects */
+.text-glow {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.text-flicker {
+  animation: flicker 0.15s infinite linear;
+}
+
+/* Input Focus Effects */
+.input-focus {
+  transition: all 0.3s ease;
+}
+
+.input-focus:focus {
+  box-shadow: 
+    0 0 20px rgba(0, 255, 157, 0.5),
+    0 0 40px rgba(241, 90, 41, 0.3);
+  border-color: #00FF9D;
+  transform: scale(1.02);
+}
+
+/* Button Hover Effects */
+.btn-psychedelic {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-psychedelic::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-psychedelic:hover::before {
+  left: 100%;
+}
+
+/* OSA Branding */
 .osa-footer {
   font-family: 'Sora', sans-serif;
   font-size: 0.875rem;
   color: rgba(237, 237, 237, 0.6);
+  position: relative;
 }
 
 .osa-footer strong {
   color: #00FF9D;
+  text-shadow: 0 0 10px #00FF9D;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.osa-footer::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #00FF9D, #F15A29);
+  animation: underline-pulse 3s ease-in-out infinite;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+@keyframes underline-pulse {
+  0%, 100% { width: 0; opacity: 0; }
+  50% { width: 200px; opacity: 1; }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00FF9D, #F15A29);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #F15A29, #FF6B9D);
+}
+
+/* Selection Styling */
+::selection {
+  background: rgba(0, 255, 157, 0.3);
+  color: #EDEDED;
+}
+
+::-moz-selection {
+  background: rgba(0, 255, 157, 0.3);
+  color: #EDEDED;
+}
+
+/* Focus Outline */
+*:focus {
+  outline: 2px solid #00FF9D;
+  outline-offset: 2px;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  border: 2px solid rgba(0, 255, 157, 0.3);
+  border-top: 2px solid #00FF9D;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
