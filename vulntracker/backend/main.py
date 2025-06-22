@@ -80,21 +80,18 @@ def delete_vuln(vuln_id: str):
             return {"ok": True}
     raise HTTPException(status_code=404, detail="Vulnerability not found")
 
-@app.post("/proposal/{vuln_id}")
-def generate_proposal(vuln_id: str):
-    """Generate PDF proposal for a vulnerability"""
-    vuln = None
-    for v in vulns:
-        if v.id == vuln_id:
-            vuln = v
-            break
-    
-    if not vuln:
-        raise HTTPException(status_code=404, detail="Vulnerability not found")
-    
+@app.post("/generate-proposal")
+def generate_proposal_from_data(vuln: Vulnerability):
+    """Generate PDF proposal from vulnerability data provided in the request body."""
+    if not vuln.id:
+        # Assign a temporary ID if one doesn't exist, for filename generation
+        vuln.id = str(uuid.uuid4())
+
     # Generate PDF
-    pdf_filename = f"proposal_{vuln_id[:8]}.pdf"
-    pdf_path = generate_proposal_pdf(vuln, pdf_filename)
+    pdf_filename = f"proposal_{vuln.id[:8]}.pdf"
+    
+    # The vulnerability object from the request body is passed directly
+    pdf_path = generate_proposal_pdf(vuln.dict(), pdf_filename)
     
     # Return the PDF file
     return FileResponse(
