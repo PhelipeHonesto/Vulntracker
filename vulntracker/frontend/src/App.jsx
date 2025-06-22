@@ -180,11 +180,11 @@ function App() {
 
   const getRiskColor = (risk) => {
     switch (risk.toLowerCase()) {
-      case 'critical': return 'bg-red-500 border-red-400 text-white'
-      case 'high': return 'bg-orange border-orange text-white'
-      case 'medium': return 'bg-yellow-500 border-yellow-400 text-black'
-      case 'low': return 'bg-green border-green text-black'
-      default: return 'bg-gray-500 border-gray-400 text-white'
+      case 'critical': return 'text-red-400 border-red-400'
+      case 'high': return 'text-orange-400 border-orange-400'
+      case 'medium': return 'text-yellow-400 border-yellow-400'
+      case 'low': return 'text-green-400 border-green-400'
+      default: return 'text-gray-400 border-gray-400'
     }
   }
 
@@ -209,7 +209,7 @@ function App() {
   const isFormValid = formData.site.trim() && formData.title.trim()
 
   return (
-    <div className="min-h-screen bg-black text-white py-8 relative">
+    <div className="min-h-screen bg-osa-dark-blue text-light-text font-sans p-8">
       {/* Shamanic Message Modal */}
       {showShamanicMessage && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -225,224 +225,187 @@ function App() {
         </div>
       )}
 
-      <div className="max-w-6xl mx-auto px-4 relative z-10">
-        {/* Psychedelic Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-6xl font-orbitron font-bold text-green mb-6 tracking-wider animate-glow">
-            VULNTRACKER
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <header className="text-center mb-16 animate-fade-in">
+          <h1 className="text-5xl font-bold tracking-wide">
+            VULN<span className="text-shamanic-green">TRACKER</span>
           </h1>
-          <div className="relative">
-            <p className="text-xl text-gray-400 font-inter mb-2">
-              Shamanic Security Intelligence
-            </p>
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-green via-orange to-pink rounded-full animate-pulse-slow"></div>
-          </div>
-          <p className="text-sm text-gray-500 mt-4 font-mono">
-            Press ↑↑↓↓←→←→BA for shamanic message
+          <p className="font-signature text-3xl text-shamanic-green/80 mt-2">
+            Sunshine Aviation Security
           </p>
-        </div>
+        </header>
         
         {/* Success Message */}
         {showSuccess && (
-          <div className="fixed top-4 right-4 glass-green px-6 py-3 rounded-lg z-50 animate-float">
-            <span className="font-semibold text-green">✨ Vulnerability added successfully!</span>
+          <div className="fixed top-5 right-5 card bg-shamanic-green text-dark-text px-6 py-3 rounded-lg z-50 animate-slide-up">
+            <span className="font-semibold">Vulnerability added!</span>
           </div>
         )}
         
-        {/* Psychedelic Form */}
-        <div className="glass-green rounded-2xl p-8 mb-16 animate-glass-shift">
-          <h2 className="text-3xl font-sora font-semibold mb-8 text-green text-center">
-            Add New Vulnerability
-          </h2>
-          <form onSubmit={handleSubmit} className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <input
-                ref={siteInputRef}
-                value={formData.site}
-                onChange={e => setFormData({...formData, site: e.target.value})}
-                onKeyPress={handleKeyPress}
-                placeholder="Site URL"
-                className="glass input-focus rounded-xl px-6 py-4 text-white placeholder-gray-400 focus:outline-none transition-all duration-300"
-                required
-              />
-              <input
-                value={formData.title}
-                onChange={e => setFormData({...formData, title: e.target.value})}
-                onKeyPress={handleKeyPress}
-                placeholder="Vulnerability Title"
-                className="glass input-focus rounded-xl px-6 py-4 text-white placeholder-gray-400 focus:outline-none transition-all duration-300"
-                required
-              />
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <select
-                value={formData.risk}
-                onChange={e => setFormData({...formData, risk: e.target.value})}
-                className="glass input-focus rounded-xl px-6 py-4 text-white focus:outline-none transition-all duration-300"
-              >
-                <option value="critical">Critical</option>
-                <option value="high">High</option>
-                <option value="medium">Medium</option>
-                <option value="low">Low</option>
-              </select>
-              
-              <input
-                type="number"
-                value={formData.price}
-                onChange={e => setFormData({...formData, price: e.target.value})}
-                placeholder="Price ($)"
-                className="glass input-focus rounded-xl px-6 py-4 text-white placeholder-gray-400 focus:outline-none transition-all duration-300"
-              />
-              
-              <select
-                value={formData.status}
-                onChange={e => setFormData({...formData, status: e.target.value})}
-                className="glass input-focus rounded-xl px-6 py-4 text-white focus:outline-none transition-all duration-300"
-              >
-                <option value="detected">Detected</option>
-                <option value="contacted">Contacted</option>
-                <option value="closed">Closed</option>
-              </select>
-            </div>
-            
-            <input
-              value={formData.tags}
-              onChange={e => setFormData({...formData, tags: e.target.value})}
-              placeholder="Tags (comma-separated)"
-              className="glass input-focus rounded-xl px-6 py-4 text-white placeholder-gray-400 focus:outline-none transition-all duration-300 w-full"
-            />
-            
-            <textarea
-              value={formData.description}
-              onChange={e => setFormData({...formData, description: e.target.value})}
-              placeholder="Description"
-              rows="4"
-              className="glass input-focus rounded-xl px-6 py-4 text-white placeholder-gray-400 focus:outline-none transition-all duration-300 w-full resize-none"
-            />
-            
-            <textarea
-              value={formData.recommendation}
-              onChange={e => setFormData({...formData, recommendation: e.target.value})}
-              placeholder="Recommendation"
-              rows="4"
-              className="glass input-focus rounded-xl px-6 py-4 text-white placeholder-gray-400 focus:outline-none transition-all duration-300 w-full resize-none"
-            />
-            
-            <div className="text-center">
-              <button
-                type="submit"
-                disabled={!isFormValid}
-                className={`btn-psychedelic px-12 py-6 rounded-xl font-bold text-lg transition-all duration-300 ${
-                  isFormValid 
-                    ? 'bg-gradient-to-r from-green to-orange text-black shadow-glow-dual hover:shadow-glow-triple animate-neon-pulse' 
-                    : 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                }`}
-              >
-                Add Vulnerability
-              </button>
-            </div>
-          </form>
-        </div>
+        <main className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          {/* Form Section */}
+          <section className="lg:col-span-1 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+            <div className="card p-8 sticky top-8">
+              <h2 className="text-2xl font-bold mb-6">Add Vulnerability</h2>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <input
+                  ref={siteInputRef}
+                  value={formData.site}
+                  onChange={e => setFormData({...formData, site: e.target.value})}
+                  placeholder="Site URL"
+                  className="input-field"
+                  required
+                />
+                <input
+                  value={formData.title}
+                  onChange={e => setFormData({...formData, title: e.target.value})}
+                  placeholder="Vulnerability Title"
+                  className="input-field"
+                  required
+                />
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <select
+                    value={formData.risk}
+                    onChange={e => setFormData({...formData, risk: e.target.value})}
+                    className="input-field"
+                  >
+                    <option value="critical">Critical</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                  </select>
+                  
+                  <select
+                    value={formData.status}
+                    onChange={e => setFormData({...formData, status: e.target.value})}
+                    className="input-field"
+                  >
+                    <option value="detected">Detected</option>
+                    <option value="contacted">Contacted</option>
+                    <option value="closed">Closed</option>
+                  </select>
+                </div>
 
-        {/* Psychedelic Vulnerability Cards */}
-        <div className="glass rounded-2xl p-8">
-          <h2 className="text-3xl font-sora font-semibold mb-10 text-green text-center">
-            Vulnerabilities ({vulns.length})
-          </h2>
-          
-          {loading ? (
-            <div className="text-center py-16">
-              <div className="loading-spinner w-16 h-16 mx-auto mb-6"></div>
-              <p className="text-gray-400 text-lg">Loading vulnerabilities...</p>
-            </div>
-          ) : vulns.length === 0 ? (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-4 animate-float">🔮</div>
-              <p className="text-gray-400 text-xl mb-2">No vulnerabilities found.</p>
-              <p className="text-gray-500">Add your first vulnerability above to begin the ritual</p>
-            </div>
-          ) : (
-            <div className="grid gap-8">
-              {vulns.map((vuln, index) => (
-                <div 
-                  key={vuln.id} 
-                  className="glass rounded-2xl p-8 hover:shadow-glow-dual transition-all duration-500 animate-float"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                <input
+                  type="number"
+                  value={formData.price}
+                  onChange={e => setFormData({...formData, price: e.target.value})}
+                  placeholder="Price ($)"
+                  className="input-field"
+                />
+                
+                <input
+                  value={formData.tags}
+                  onChange={e => setFormData({...formData, tags: e.target.value})}
+                  placeholder="Tags (comma-separated)"
+                  className="input-field"
+                />
+                
+                <textarea
+                  value={formData.description}
+                  onChange={e => setFormData({...formData, description: e.target.value})}
+                  placeholder="Description"
+                  rows="3"
+                  className="input-field"
+                />
+                
+                <textarea
+                  value={formData.recommendation}
+                  onChange={e => setFormData({...formData, recommendation: e.target.value})}
+                  placeholder="Recommendation"
+                  rows="3"
+                  className="input-field"
+                />
+                
+                <button
+                  type="submit"
+                  disabled={!isFormValid}
+                  className="w-full btn btn-primary py-3 disabled:bg-gray-500 disabled:text-gray-400 disabled:shadow-none disabled:cursor-not-allowed"
                 >
-                  <div className="flex justify-between items-start mb-6">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-4 mb-4">
-                        <h3 className="text-2xl font-sora font-bold text-white">{vuln.title}</h3>
-                        <span className={`px-4 py-2 rounded-full text-sm font-bold border-2 ${getRiskColor(vuln.risk)}`}>
-                          {vuln.risk}
-                        </span>
-                        <span className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm glass ${getStatusGlow(vuln.status)}`}>
-                          {getStatusIcon(vuln.status)} {vuln.status}
-                        </span>
+                  Add Vulnerability
+                </button>
+              </form>
+            </div>
+          </section>
+
+          {/* Vulnerabilities List */}
+          <section className="lg:col-span-2">
+            {loading ? (
+              <div className="text-center p-16">
+                <div className="loading-spinner w-12 h-12 mx-auto"></div>
+                <p className="text-gray-400 mt-4">Loading vulnerabilities...</p>
+              </div>
+            ) : vulns.length === 0 ? (
+              <div className="card text-center p-16">
+                <p className="text-gray-400 text-lg">No vulnerabilities found.</p>
+                <p className="text-gray-500">Add one to get started.</p>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {vulns.map((vuln, index) => (
+                  <div 
+                    key={vuln.id} 
+                    className="card p-6 animate-slide-up"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <div className="flex justify-between items-start">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${getRiskColor(vuln.risk)}`}>
+                            {vuln.risk}
+                          </span>
+                          <h3 className="text-xl font-bold text-white">{vuln.title}</h3>
+                        </div>
+                        <p className="text-osa-blue text-sm mb-3">{vuln.site}</p>
+                        
+                        {vuln.description && (
+                          <p className="text-gray-300 mb-3 text-sm leading-relaxed">{vuln.description}</p>
+                        )}
+                        
+                        {vuln.tags.length > 0 && (
+                          <div className="flex gap-2 mb-3 flex-wrap">
+                            {vuln.tags.map((tag, i) => (
+                              <span key={i} className="bg-white/10 text-gray-300 px-2 py-1 rounded text-xs">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                        <p className="text-shamanic-green font-bold text-lg">${vuln.price}</p>
                       </div>
-                      <p className="text-green text-lg mb-4 font-mono">{vuln.site}</p>
-                      {vuln.description && (
-                        <p className="text-gray-300 mb-4 leading-relaxed text-lg">{vuln.description}</p>
-                      )}
-                      {vuln.recommendation && (
-                        <div className="mb-4 p-4 glass-orange rounded-xl">
-                          <p className="text-green font-bold text-lg mb-2">Recommendation:</p>
-                          <p className="text-gray-300">{vuln.recommendation}</p>
-                        </div>
-                      )}
-                      {vuln.tags.length > 0 && (
-                        <div className="flex gap-3 mb-4 flex-wrap">
-                          {vuln.tags.map((tag, i) => (
-                            <span key={i} className="glass px-3 py-1 rounded-lg text-sm border border-green/30 text-green">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                      <p className="text-green font-bold text-2xl">${vuln.price}</p>
-                    </div>
-                    
-                    <div className="flex gap-4 ml-8">
-                      <button
-                        onClick={() => generateProposal(vuln.id)}
-                        className="btn-psychedelic bg-gradient-to-r from-green to-cyan text-black px-6 py-3 rounded-xl text-sm font-bold hover:shadow-glow-dual transition-all duration-300"
-                      >
-                        📄 Generate Proposal
-                      </button>
-                      <select
-                        value={vuln.status}
-                        onChange={(e) => updateStatus(vuln.id, e.target.value)}
-                        className="glass border border-green/30 rounded-lg px-4 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-green"
-                      >
-                        <option value="detected">Detected</option>
-                        <option value="contacted">Contacted</option>
-                        <option value="closed">Closed</option>
-                      </select>
-                      <button
-                        onClick={() => deleteVuln(vuln.id)}
-                        className="btn-psychedelic bg-gradient-to-r from-red-600 to-pink-600 text-white px-4 py-3 rounded-xl text-sm hover:shadow-glow-pink transition-all duration-300"
-                      >
-                        🗑️
-                      </button>
+                      
+                      <div className="flex flex-col gap-2 ml-4">
+                        <button
+                          onClick={() => generateProposal(vuln.id)}
+                          className="btn btn-primary text-sm"
+                        >
+                          Proposal
+                        </button>
+                        <select
+                          value={vuln.status}
+                          onChange={(e) => updateStatus(vuln.id, e.target.value)}
+                          className="input-field text-sm"
+                        >
+                          <option value="detected">Detected</option>
+                          <option value="contacted">Contacted</option>
+                          <option value="closed">Closed</option>
+                        </select>
+                        <button
+                          onClick={() => deleteVuln(vuln.id)}
+                          className="btn btn-danger text-sm"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-        
-        {/* OSA Footer */}
-        <div className="text-center mt-20 pb-8">
-          <p className="osa-footer text-lg">
-            Built with clarity, powered by <strong>Orange Sunshine Aviation</strong> ☀️
-          </p>
-          <p className="text-sm text-gray-500 mt-4 hover:text-green transition-colors cursor-pointer font-mono" 
-             title="This system is a ritual of sovereignty.">
-            This system is a ritual of sovereignty.
-          </p>
-        </div>
+                ))}
+              </div>
+            )}
+          </section>
+        </main>
       </div>
     </div>
   )

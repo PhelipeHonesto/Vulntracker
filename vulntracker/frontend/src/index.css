@@ -3,12 +3,13 @@
 @tailwind utilities;
 
 :root {
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
   font-weight: 400;
-  color-scheme: dark;
+  
   color: #EDEDED;
-  background-color: #0A0A0A;
+  background-color: #091c35;
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -17,12 +18,8 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
   min-height: 100vh;
-  background: #0A0A0A;
-  overflow-x: hidden;
+  background-color: #091c35;
 }
 
 #root {
@@ -195,32 +192,32 @@ body::before {
   50% { width: 200px; opacity: 1; }
 }
 
-/* Scrollbar Styling */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0A0A0A;
+  background: #091c35;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #00FF9D, #F15A29);
-  border-radius: 4px;
+  background-color: #0a4bb6;
+  border-radius: 5px;
+  border: 2px solid #091c35;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #F15A29, #FF6B9D);
+  background-color: #00FF9D;
 }
 
-/* Selection Styling */
+/* Custom Selection */
 ::selection {
-  background: rgba(0, 255, 157, 0.3);
+  background-color: rgba(0, 255, 157, 0.3);
   color: #EDEDED;
 }
-
 ::-moz-selection {
-  background: rgba(0, 255, 157, 0.3);
+  background-color: rgba(0, 255, 157, 0.3);
   color: #EDEDED;
 }
 
@@ -241,4 +238,29 @@ body::before {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Base Component Styles */
+.btn {
+  @apply px-6 py-2 rounded-lg font-semibold text-white transition-all duration-300;
+}
+
+.btn-primary {
+  @apply bg-shamanic-green text-dark-text hover:bg-opacity-80 shadow-accent-glow;
+}
+
+.btn-secondary {
+  @apply bg-osa-blue hover:bg-opacity-80;
+}
+
+.btn-danger {
+  @apply bg-red-600 hover:bg-red-700;
+}
+
+.card {
+  @apply bg-white/5 border border-white/10 rounded-xl shadow-card-shadow;
+}
+
+.input-field {
+  @apply w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-light-text placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-shamanic-green transition-all duration-300;
 }
